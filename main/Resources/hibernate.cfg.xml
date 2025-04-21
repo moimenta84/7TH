@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/7TH</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/7HT</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">1234</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
 
 
@@ -16,6 +16,10 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.juego7th.modelo.Users"/>
+        <mapping class="com.juego7th.modelo.Games"/>
+        <mapping class="com.juego7th.modelo.UsersGames"/>
+
+
 
     </session-factory>
 </hibernate-configuration>

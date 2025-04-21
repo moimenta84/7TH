@@ -1,24 +1,25 @@
 package com.juego7th.modelo;
+import com.juego7th.modelo.UsersGames;
 import javax.persistence.Table;
 import javax.persistence.*;
 import javax.persistence.Entity;
-
+import java.util.HashSet;
+import java.util.Set;
 @Entity
 @Table(name = "users")
-public class Users {
+public class Users{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(nullable = false, length = 100)
     private String name;
-
-    @Column(nullable = false, length = 100)
     private String email;
-
-    @Column(name = "pasword", nullable = false, length = 100) // cuidado con el nombre real en BD
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    private Set<UsersGames> partidas = new HashSet<>();
+
 
     public Users() {}
 
@@ -63,16 +64,5 @@ public class Users {
     public void setPassword(String password) {
 
         this.password = password;
-    }
-
-    @Override
-    public
-    String toString() {
-        return "Users{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }
