@@ -11,7 +11,7 @@ class Main {
 
 
                 // Crear un usuario de prueba
-                Users nuevoUsuario = new Users("Ana", "ana@example.com", "contrasena123");
+                Users nuevoUsuario = new Users("Jose", "jose@example.com", "contrasena124");
 
                 // Abrir sesión Hibernate
                 Session session = HibernateUtil.getSessionFactory().openSession();
