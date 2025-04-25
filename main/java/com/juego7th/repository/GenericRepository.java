@@ -17,8 +17,7 @@ public class GenericRepository<ID extends Serializable, T> implements Repository
     }
 
     @Override
-    public
-    void create(T entity) {
+    public  void create(T entity) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(entity);
@@ -27,8 +26,7 @@ public class GenericRepository<ID extends Serializable, T> implements Repository
     }
 
     @Override
-    public
-    void update(T entity) {
+    public  void update(T entity) {
 
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -38,8 +36,7 @@ public class GenericRepository<ID extends Serializable, T> implements Repository
     }
 
     @Override
-    public
-    void delete(ID id) {
+    public void delete(ID id) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
