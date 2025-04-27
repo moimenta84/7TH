@@ -3,11 +3,12 @@ import com.juego7th.modelo.UsersGames;
 import javax.persistence.Table;
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "users")
-public class Users{
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

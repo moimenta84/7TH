@@ -1,19 +1,17 @@
 package com.juego7th.repository;
-
 import com.juego7th.Utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 
-public class GenericRepository<ID extends Serializable, T> implements RepositoryImplements<T, ID> {
+public class GenericRepository<T,ID extends Serializable> implements RepositoryImplements<T, ID> {
 
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    private Class<T> entityclass;
+    private final Class<T> entityClass;
 
     public GenericRepository(Class<T> entityClass) {
-        this.entityclass = entityclass;
+        this.entityClass = entityClass;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class GenericRepository<ID extends Serializable, T> implements Repository
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Entity entity = session.get(Entity.class, id);
+        T entity = session.get(entityClass, id);
         if(entity != null) {
             session.delete(entity);
         }
@@ -55,14 +53,14 @@ public class GenericRepository<ID extends Serializable, T> implements Repository
 
         try(Session session = sessionFactory.openSession()){
 
-            return session.get(entityclass, id);
+            return session.get(entityClass, id);
         }
     }
     @Override
     public List<T> findAll() {
         try(Session session = sessionFactory.openSession()){
 
-            return session.createQuery("FROM " +entityclass.getSimpleName(),entityclass).getResultList();
+            return session.createQuery("FROM " +entityClass.getSimpleName(),entityClass).getResultList();
         }
     }
 }

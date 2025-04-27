@@ -2,7 +2,7 @@ package com.juego7th.repository;
 import java.io.Serializable;
 import java.util.List;
 
-public interface RepositoryImplements <T, ID extends Serializable>{
+public interface RepositoryImplements<T, ID extends Serializable>{
 
     void create(T entity);
     void update(T entity);

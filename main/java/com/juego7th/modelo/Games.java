@@ -1,12 +1,13 @@
 package com.juego7th.modelo;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "games")
-public class Games {
+public class Games implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;

@@ -1,5 +1,10 @@
 package com.juego7th.repository;
 
-public
-class GamesRepository {
+import com.juego7th.modelo.Games;
+
+public class GamesRepository extends GenericRepository<Games,Integer>{
+
+    public GamesRepository() {
+        super(Games.class);
+    }
 }
