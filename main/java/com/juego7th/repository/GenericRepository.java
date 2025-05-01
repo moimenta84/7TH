@@ -4,9 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import java.io.Serializable;
 import java.util.List;
-
 public class GenericRepository<T,ID extends Serializable> implements RepositoryImplements<T, ID> {
-
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private final Class<T> entityClass;
 
@@ -22,7 +20,6 @@ public class GenericRepository<T,ID extends Serializable> implements RepositoryI
             session.getTransaction().commit();
         }
     }
-
     @Override
     public  void update(T entity) {
 
@@ -32,7 +29,6 @@ public class GenericRepository<T,ID extends Serializable> implements RepositoryI
             session.getTransaction().commit();
         }
     }
-
     @Override
     public void delete(ID id) {
 
@@ -42,8 +38,8 @@ public class GenericRepository<T,ID extends Serializable> implements RepositoryI
         if(entity != null) {
             session.delete(entity);
         }
+        
         session.getTransaction().commit();
-
     }
     @Override
     public T getfindById(ID id) {
