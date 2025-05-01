@@ -3,13 +3,13 @@ import com.juego7th.Utils.ValidatorUtil;
 import com.juego7th.modelo.Users;
 import com.juego7th.repository.UsersRepository;
 import org.hibernate.HibernateException;
-
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 public class UsersService {
 
     private final UsersRepository usersRepository = new UsersRepository();
-    public String createUser(String username, String password,String email) {
+    public String registrerUser(String username, String password,String email) {
 
         try {
 
@@ -39,7 +39,28 @@ public class UsersService {
         }
     }
 
-    public String  updateUser(String username, String password,String email){
+    public Users loginUser(String username, String password) {
+
+        try{
+
+            Users user = usersRepository.findByName(username);
+
+            if(user.getPassword().equals(password)){
+
+                return user;
+
+            }else{
+
+                return null;
+            }
+        }catch (HibernateException e) {
+
+            return null;
+
+        }
+    }
+
+    public String  updateUser(int id, String username, String password,String email){
 
         try{
             if (!ValidatorUtil.isName(username)) {
@@ -52,8 +73,9 @@ public class UsersService {
             } else if (!ValidatorUtil.isValidPassword(password)) {
                 return "Error: Invalid password";
 
-            }else{
-                Users updateUsers = new Users();
+            }else {
+
+                Users updateUsers = usersRepository.getfindById(id);;
                 updateUsers.setName(username);
                 updateUsers.setEmail(email);
                 updateUsers.setPassword(password);
@@ -121,7 +143,7 @@ public class UsersService {
 
             }else{
 
-                 result = new StringBuilder();
+                result = new StringBuilder();
                 for(Users user : clients){
                     result.append("\n")
                             .append("ID: " + user.getId())
