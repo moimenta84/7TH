@@ -1,9 +1,6 @@
 package com.juego7th.modelo;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
-
 @Entity
 @Table(name = "users_games")
 public class UsersGames implements Serializable {
@@ -12,21 +9,27 @@ public class UsersGames implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_partida")
-    private Games game;
-
-    @ManyToOne
     @JoinColumn(name = "id_user")
     private Users user;
 
+    @ManyToOne
+    @JoinColumn(name = "id_partida")
+    private Games game;
+
     private int idGanador;
 
+    @Column(name = "numero_seleccionado")
+    private int numeroSeleccionado;
+    @Column(name = "vidas")
+    private int vidas = 7;
 
-    public UsersGames(int id, Games game, Users user, int idGanador) {
+    public UsersGames(int id, Games game, Users user, int idGanador,int numeroSeleccionado,int vidas) {
         this.id = id;
         this.game = game;
         this.user = user;
         this.idGanador = idGanador;
+        this.numeroSeleccionado = numeroSeleccionado;
+        this.vidas = vidas;
     }
 
     public UsersGames() {
@@ -70,5 +73,25 @@ public class UsersGames implements Serializable {
     public
     void setIdGanador(int idGanador) {
         this.idGanador = idGanador;
+    }
+
+    public
+    int getNumeroSeleccionado() {
+        return numeroSeleccionado;
+    }
+
+    public
+    void setNumeroSeleccionado(int numeroSeleccionado) {
+        this.numeroSeleccionado = numeroSeleccionado;
+    }
+
+    public
+    int getVidas() {
+        return vidas;
+    }
+
+    public
+    void setVidas(int vidas) {
+        this.vidas = vidas;
     }
 }

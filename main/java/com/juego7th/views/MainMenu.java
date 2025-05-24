@@ -1,60 +1,56 @@
 package com.juego7th.views;
+import com.juego7th.Utils.FuncionesGenerales;
+import com.juego7th.controller.GamesController;
+import com.juego7th.controller.UsersController;
+import com.juego7th.controller.UsersGamesController;
+import com.juego7th.modelo.Games;
 import com.juego7th.modelo.Users;
-import com.juego7th.service.UsersService;
 import java.util.Scanner;
 public class MainMenu {
     public static void menu(){
 
-         Scanner scanner = new Scanner(System.in);
-         UsersService usersService = new UsersService();
+         final UsersController usersController = new UsersController();
+         final UsersGamesController usersGamesController = new UsersGamesController();
+         final GamesController gamesController = new GamesController();
+
+         Games games = null;
          Users user = null;
+         Scanner scanner = new Scanner(System.in);
+
          int opcion;
-         do {
-            vista();
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            do {
+                vista();
+                opcion = FuncionesGenerales.scanerNum();
+
+                // Limpiar el buffer
                 switch (opcion) {
                     case 1:
-                        System.out.print("Ingrese nombre de usuario: ");
-                        String nuevoUsuario = scanner.nextLine();
-                        System.out.print("Ingrese correo electrónico: ");
-                        String nuevoEmail = scanner.nextLine();
-                        System.out.print("Ingrese contraseña: ");
-                        String nuevaContrasena = scanner.nextLine();
-                        String registroResultado = usersService.registrerUser(nuevoUsuario, nuevaContrasena, nuevoEmail);
-                        System.out.println(registroResultado);
+                        usersController.promptRegister();
                         break;
 
                     case 2:
-                        System.out.print("Ingrese nombre de usuario: ");
-                        String usuario = scanner.nextLine();
-                        System.out.print("Ingrese contraseña: ");
-                        String contrasena = scanner.nextLine();
-                        user = usersService.loginUser(usuario, contrasena);
-                        if (user != null) {
-                            System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + user.getName() + "!");
+                        if (games == null) {
+                            System.out.println("Primero debes crear una partida (opción 3).");
                         } else {
-                            System.out.println("Error: Credenciales incorrectas.");
+                            user = usersController.loginUser(games);
                         }
                         break;
 
+
                     case 3:
-                        if (user != null) {
-                            System.out.println("Iniciando el juego 'Seven To Hell'...");
-                            // Lógica del juego aquí
+                        if (games == null) {
+                            games = gamesController.startGame();
+                            System.out.println("Partida creada con ID: " + games.getId());
                         } else {
-                            System.out.println("Debe iniciar sesión para jugar.");
+                            System.out.println("Ya hay una partida activa con ID: " + games.getId());
                         }
                         break;
 
                     case 4:
-                        if (user != null) {
-                            System.out.println("=== Perfil de Usuario ===");
-                            System.out.println("ID: " + user.getId());
-                            System.out.println("Nombre: " + usersService);
-                            System.out.println("Correo electrónico: " + user.getEmail());
+                        if (games == null) {
+                            System.out.println("Primero debes crear una partida.");
                         } else {
-                            System.out.println("Debe iniciar sesión para ver el perfil.");
+                            usersGamesController.logicaJuego(games);
                         }
                         break;
 
@@ -64,9 +60,10 @@ public class MainMenu {
                     default:
                         System.out.println("Opción no válida. Intente nuevamente.");
                 }
-         } while (opcion != 5);
+            } while (opcion != 5);
 
-                scanner.close();
+            scanner.close();
+
     }
 
     public static void vista(){
@@ -74,10 +71,16 @@ public class MainMenu {
         System.out.println("\n=== Menú Principal ===");
         System.out.println("1. Registrarse");
         System.out.println("2. Iniciar sesión");
-        System.out.println("3. Jugar");
-        System.out.println("4. Ver perfil");
+        System.out.println("3. Crear Partida");
+        System.out.println("4. Jugar");
         System.out.println("5. Salir");
         System.out.print("Seleccione una opción: ");
+
+    }
+
+    public static void jugar(){
+
+
 
     }
 }

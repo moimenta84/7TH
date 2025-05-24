@@ -7,18 +7,17 @@ import java.util.List;
 public class GenericRepository<T,ID extends Serializable> implements RepositoryImplements<T, ID> {
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private final Class<T> entityClass;
-
     public GenericRepository(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
-
     @Override
-    public  void create(T entity) {
+    public  String create(T entity) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(entity);
             session.getTransaction().commit();
         }
+        return "Se ha credo correctamente el registro";
     }
     @Override
     public  void update(T entity) {
@@ -38,14 +37,11 @@ public class GenericRepository<T,ID extends Serializable> implements RepositoryI
         if(entity != null) {
             session.delete(entity);
         }
-        
         session.getTransaction().commit();
     }
     @Override
     public T getfindById(ID id) {
-
         try(Session session = sessionFactory.openSession()){
-
             return session.get(entityClass, id);
         }
     }

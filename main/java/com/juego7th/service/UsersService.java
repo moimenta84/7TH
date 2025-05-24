@@ -1,6 +1,8 @@
 package com.juego7th.service;
 import com.juego7th.Utils.ValidatorUtil;
 import com.juego7th.modelo.Users;
+import com.juego7th.modelo.UsersGames;
+import com.juego7th.repository.UsersGamesRepository;
 import com.juego7th.repository.UsersRepository;
 import org.hibernate.HibernateException;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.Map;
 public class UsersService {
 
     private final UsersRepository usersRepository = new UsersRepository();
+    private final UsersGamesRepository usersGamesRepository = new UsersGamesRepository();
     public String registrerUser(String username, String password,String email) {
 
         try {
@@ -19,7 +22,7 @@ public class UsersService {
             }else if (!ValidatorUtil.isValidEmail(email)) {
                 return "Error: Invalid email format";
 
-            }else if(!ValidatorUtil.isValidPassword(password)) {
+            }else if(ValidatorUtil.isValidPassword(password)) {
                 return "Error: Invalid password";
 
             }else{
@@ -44,8 +47,7 @@ public class UsersService {
         try{
 
             Users user = usersRepository.findByName(username);
-
-            if(user.getPassword().equals(password)){
+            if(user.getPassword().equals(password) && user.getEmail().equals(username)){
 
                 return user;
 
@@ -56,11 +58,9 @@ public class UsersService {
         }catch (HibernateException e) {
 
             return null;
-
         }
     }
-
-    public String  updateUser(int id, String username, String password,String email){
+    public String  updateUser(int id, String username, String password,String email,int vidas){
 
         try{
             if (!ValidatorUtil.isName(username)) {
@@ -89,20 +89,16 @@ public class UsersService {
             return "Error: Could not create client "+e.getMessage();
         }
     }
-
     public String deleteUser(int id) {
 
         try{
-
           Users user =  usersRepository.getfindById(id);
           if(ValidatorUtil.isObjectValid(user)){
               usersRepository.delete(id);
               return "Client deleted successfully! ID: " + id;
-
           }else{
               return "Error: Could not delete Users";
           }
-
         }catch (HibernateException e) {
             return "Database error: Could not delete users";
 
@@ -110,7 +106,6 @@ public class UsersService {
             return "Unexpected error: " + e.getMessage();
         }
     }
-
     public String gerUsersById(int id) {
 
         try{
@@ -132,7 +127,6 @@ public class UsersService {
             return "Unexpected error: " + e.getMessage();
         }
     }
-
     public String getAllUsers() {
         StringBuilder result;
         try{
@@ -153,7 +147,6 @@ public class UsersService {
                             .append("EMAIL: " + user.getEmail());
                 }
             }
-
         }catch (HibernateException e) {
             return "Database error: Could not retrieve user";
 
@@ -162,4 +155,17 @@ public class UsersService {
         }
         return result.toString();
     }
+    public Users getUserById(int id) {
+
+        return usersRepository.getfindById(id);
+    }
+
+    public void actualizarVidas(UsersGames userGames, int vidas) {
+        userGames.setVidas(vidas);
+        usersGamesRepository.update(userGames);
+        System.out.println("Vidas actualizadas para " + userGames.getId() + ": " + vidas);
+
+
+    }
+
 }

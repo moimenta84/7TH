@@ -16,8 +16,9 @@ public class Users implements Serializable {
     private String name;
     private String email;
     private String password;
+;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @SuppressWarnings("JpaAttributeTypeInspection")
     private Set<UsersGames> partidas = new HashSet<>();
 
@@ -28,6 +29,7 @@ public class Users implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+
     }
     // Getters y setters
 
@@ -65,5 +67,20 @@ public class Users implements Serializable {
     public void setPassword(String password) {
 
         this.password = password;
+    }
+
+    public
+    void setId(int id) {
+        this.id = id;
+    }
+
+    public
+    Set<UsersGames> getPartidas() {
+        return partidas;
+    }
+
+    public
+    void setPartidas(Set<UsersGames> partidas) {
+        this.partidas = partidas;
     }
 }
