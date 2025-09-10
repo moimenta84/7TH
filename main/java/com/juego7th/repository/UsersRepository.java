@@ -1,5 +1,4 @@
 package com.juego7th.repository;
-
 import com.juego7th.Utils.HibernateUtil;
 import com.juego7th.modelo.Users;
 import org.hibernate.Session;
@@ -24,6 +23,7 @@ public class UsersRepository extends GenericRepository<Users,Integer>{
                     .uniqueResult();
         }
     }
+    
     public void update(Users user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
@@ -33,7 +33,4 @@ public class UsersRepository extends GenericRepository<Users,Integer>{
             System.out.println("Actualización commit realizada");
         }
     }
-
-
-
 }
