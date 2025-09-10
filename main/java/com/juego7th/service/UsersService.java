@@ -15,7 +15,6 @@ public class UsersService {
     public String registrerUser(String username, String password,String email) {
 
         try {
-
             if (!ValidatorUtil.isName(username)) {
                 return "Error: Invalid name";
 
@@ -26,7 +25,6 @@ public class UsersService {
                 return "Error: Invalid password";
 
             }else{
-
                 Users newUsers = new Users();
                 newUsers.setName(username);
                 newUsers.setEmail(email);
@@ -34,6 +32,7 @@ public class UsersService {
                 usersRepository.create(newUsers);
                 return "Client created successfully! ID: " + newUsers.getId();
             }
+            
         }catch (HibernateException e){
             return "Database error: Could not create client";
 
@@ -45,18 +44,14 @@ public class UsersService {
     public Users loginUser(String username, String password) {
 
         try{
-
             Users user = usersRepository.findByName(username);
             if(user.getPassword().equals(password) && user.getEmail().equals(username)){
-
                 return user;
 
             }else{
-
                 return null;
             }
         }catch (HibernateException e) {
-
             return null;
         }
     }
@@ -74,7 +69,6 @@ public class UsersService {
                 return "Error: Invalid password";
 
             }else {
-
                 Users updateUsers = usersRepository.getfindById(id);;
                 updateUsers.setName(username);
                 updateUsers.setEmail(email);
@@ -96,6 +90,7 @@ public class UsersService {
           if(ValidatorUtil.isObjectValid(user)){
               usersRepository.delete(id);
               return "Client deleted successfully! ID: " + id;
+              
           }else{
               return "Error: Could not delete Users";
           }
@@ -111,13 +106,11 @@ public class UsersService {
         try{
             Users user =  usersRepository.getfindById(id);
             if(ValidatorUtil.isObjectValid(user)){
-
                 return "Users\n: "+
                         "ID: " + user.getId()+"\n"+
                         "NAME: "+ user.getName()+"\n"+
                         "EMAIL: "+ user.getEmail();
             }else{
-
                 return "Error: Could not get Users";
             }
         }catch (HibernateException e) {
@@ -164,8 +157,5 @@ public class UsersService {
         userGames.setVidas(vidas);
         usersGamesRepository.update(userGames);
         System.out.println("Vidas actualizadas para " + userGames.getId() + ": " + vidas);
-
-
     }
-
 }
