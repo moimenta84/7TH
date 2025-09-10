@@ -4,7 +4,6 @@ import com.juego7th.modelo.Games;
 import com.juego7th.modelo.Users;
 import com.juego7th.modelo.UsersGames;
 import org.hibernate.Session;
-
 import java.util.List;
 
 public class UsersGamesRepository extends GenericRepository<UsersGames,Integer>{
