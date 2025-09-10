@@ -17,15 +17,14 @@ public class UsersGamesService {
     private final UsersGamesRepository usersGamesRepository = new UsersGamesRepository();
 
     // Devuelve directamente la lista de usuarios en una partida
-    public
-    List<UsersGames> getUsersByGameId(int gameId) {
+    public List<UsersGames> getUsersByGameId(int gameId) {
         return usersGamesRepository.findUsersByGameId(gameId);
     }
     // Añadir usuario a partida
     public String addUserToGame(int userId, int gameId) {
         Users user = usersRepository.getfindById(userId);
         Games game = gamesRepository.getfindById(gameId);
-
+        
         if (user == null || game == null) {
             return "El usuario o la partida no existen.";
         }
@@ -35,7 +34,6 @@ public class UsersGamesService {
         usersGamesRepository.create(usersGames);
         return "Se ha guardado correctamente el usuario: " + user.getName() + " en la partida: " + game.getId();
     }
-
     // Guardar número del jugador
     public String addNumSelection(Users user, int numero, Games game) {
         if (numero < 0 || numero > 100) {
@@ -43,7 +41,6 @@ public class UsersGamesService {
         }
 
         UsersGames usersGames = usersGamesRepository.findByUserAndGame(user, game);
-
         if (usersGames == null) {
             usersGames = new UsersGames();
             usersGames.setUser(user);
@@ -55,12 +52,10 @@ public class UsersGamesService {
         return "Número " + numero + " guardado correctamente para " + user.getName() +
                 ". Vidas restantes: " + usersGames.getVidas();
     }
-    public
-    void save(UsersGames usersGames) {
+    public void save(UsersGames usersGames) {
         usersGamesRepository.create(usersGames);
     }
-    public
-    void update(UsersGames usersGames) {
+    public void update(UsersGames usersGames) {
         usersGamesRepository.update(usersGames);
     }
 
