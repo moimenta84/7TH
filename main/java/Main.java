@@ -10,14 +10,10 @@ public
 class Main {
 private static UsersRepository usersRepository = new UsersRepository();
 private static UsersGamesService usersGamesService = new UsersGamesService();
-
-    public static
-    void main(String[] args) {
-
+    
+    public static void main(String[] args) {
         MainMenu.menu();
-
     }
-
 }
 
 
