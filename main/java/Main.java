@@ -6,8 +6,7 @@ import com.juego7th.views.MainMenu;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public
-class Main {
+public class Main {
 private static UsersRepository usersRepository = new UsersRepository();
 private static UsersGamesService usersGamesService = new UsersGamesService();
     
