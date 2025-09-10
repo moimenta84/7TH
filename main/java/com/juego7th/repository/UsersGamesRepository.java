@@ -12,6 +12,7 @@ public class UsersGamesRepository extends GenericRepository<UsersGames,Integer>{
     public UsersGamesRepository() {
         super(UsersGames.class);
     }
+    
     //metodo para devolverlista de usuarios en una partida por id
     public List<UsersGames> findUsersByGameId(int gameId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -21,6 +22,7 @@ public class UsersGamesRepository extends GenericRepository<UsersGames,Integer>{
                     .list();
         }
     }
+    
     public UsersGames addNumSelection(Users user, int numero, Games game) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
@@ -34,8 +36,6 @@ public class UsersGamesRepository extends GenericRepository<UsersGames,Integer>{
             if (usersGames != null) {
                 usersGames.setNumeroSeleccionado(numero);
                 session.update(usersGames);
-
-
                 usersGames.setVidas(usersGames.getVidas() - 1);
                 session.merge(user); // guarda el nuevo valor de vidas
             }
@@ -47,7 +47,7 @@ public class UsersGamesRepository extends GenericRepository<UsersGames,Integer>{
             return null;
         }
     }
-
+    
     public UsersGames findByUserAndGame(Users user, Games game) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(
@@ -57,8 +57,7 @@ public class UsersGamesRepository extends GenericRepository<UsersGames,Integer>{
                     .uniqueResult();
         }
     }
-
-
+    
     public void saveOrUpdate(UsersGames usersGames) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
@@ -66,8 +65,6 @@ public class UsersGamesRepository extends GenericRepository<UsersGames,Integer>{
             session.getTransaction().commit();
         }
     }
-
-
 }
 
 
