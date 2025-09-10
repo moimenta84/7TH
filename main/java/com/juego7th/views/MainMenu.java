@@ -36,7 +36,6 @@ public class MainMenu {
                         }
                         break;
 
-
                     case 3:
                         if (games == null) {
                             games = gamesController.startGame();
@@ -45,7 +44,7 @@ public class MainMenu {
                             System.out.println("Ya hay una partida activa con ID: " + games.getId());
                         }
                         break;
-
+                        
                     case 4:
                         if (games == null) {
                             System.out.println("Primero debes crear una partida.");
@@ -57,15 +56,14 @@ public class MainMenu {
                     case 5:
                         System.out.println("Saliendo del juego. ¡Hasta pronto!");
                         break;
+                        
                     default:
                         System.out.println("Opción no válida. Intente nuevamente.");
                 }
             } while (opcion != 5);
-
             scanner.close();
-
     }
-
+    
     public static void vista(){
 
         System.out.println("\n=== Menú Principal ===");
@@ -77,14 +75,7 @@ public class MainMenu {
         System.out.print("Seleccione una opción: ");
 
     }
-
-    public static void jugar(){
-
-
-
-    }
-}
-
+  
 
 
 
