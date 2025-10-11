@@ -37,22 +37,5 @@ El último jugador con puntos es el ganador 🏆
 El ADMIN puede ver los números de los demás jugadores.  
 Si el ADMIN pierde, todos los USERS ganan 😇  
 Este modo añade un componente estratégico en el que los demás deben coordinarse para derrotar al ADMIN.
-src/
-├── main/
-│   ├── java/com/seventohell/
-│   │   ├── model/         ➡️ Entidades JPA (Usuario, Partida, Ronda, etc.)
-│   │   ├── service/       ➡️ Lógica del juego, validaciones y reglas
-│   │   ├── controller/    ➡️ Controladores de entrada o API REST
-│   │   ├── repository/    ➡️ Interfaces DAO para acceso a base de datos
-│   │   └── Main.java      ➡️ Clase principal del juego
-│   └── resources/
-│       ├── hibernate.cfg.xml  ➡️ Configuración de Hibernate
-│       ├── application.properties / log4j.properties
-│       └── scripts.sql        ➡️ Scripts de inicialización (si aplica)
-└── test/
-    └── java/com/seventohell/  ➡️ Pruebas unitarias con JUnit
-
-
 Si el ADMIN pierde, todos los USERS ganan 😇
-
 Este modo añade un componente estratégico en el que los demás deben coordinarse para derrotar al ADMIN.``
