@@ -1,4 +1,4 @@
-``
+
 # 🎮 Seven To Hell / Seven To Heaven
 
 ## 📝 Descripción General
@@ -20,29 +20,38 @@ Si el ADMIN pierde, todos los usuarios ganan automáticamente.
 - 💻 **IDE recomendado:** IntelliJ IDEA / Eclipse / VS Code  
 
 ---
-🕹️ Cómo Jugar
+## 🕹️ Cómo Jugar
 
-Regístrate como usuario.
+Regístrate como usuario.  
+Inicia sesión en el sistema.  
+Espera a que haya 8 jugadores conectados.  
+Ingresa un número entre 0 y 100 en cada ronda.  
+El sistema calcula la media * 0.8 → quien más se acerque gana la ronda.  
+Los jugadores que no ganan pierden puntos; empatar también resta puntuación.  
+Si llegas a 0 puntos, quedas eliminado ❌  
+El último jugador con puntos es el ganador 🏆  
 
-Inicia sesión en el sistema.
+### 👑 Modo ADMIN (Seven To Heaven)
 
-Espera a que haya 8 jugadores conectados.
+1 jugador actúa como ADMIN.  
+El ADMIN puede ver los números de los demás jugadores.  
+Si el ADMIN pierde, todos los USERS ganan 😇  
+Este modo añade un componente estratégico en el que los demás deben coordinarse para derrotar al ADMIN.
+src/
+├── main/
+│   ├── java/com/seventohell/
+│   │   ├── model/         ➡️ Entidades JPA (Usuario, Partida, Ronda, etc.)
+│   │   ├── service/       ➡️ Lógica del juego, validaciones y reglas
+│   │   ├── controller/    ➡️ Controladores de entrada o API REST
+│   │   ├── repository/    ➡️ Interfaces DAO para acceso a base de datos
+│   │   └── Main.java      ➡️ Clase principal del juego
+│   └── resources/
+│       ├── hibernate.cfg.xml  ➡️ Configuración de Hibernate
+│       ├── application.properties / log4j.properties
+│       └── scripts.sql        ➡️ Scripts de inicialización (si aplica)
+└── test/
+    └── java/com/seventohell/  ➡️ Pruebas unitarias con JUnit
 
-Ingresa un número entre 0 y 100 en cada ronda.
-
-El sistema calcula la media * 0.8 → quien más se acerque gana la ronda.
-
-Los jugadores que no ganan pierden puntos; empatar también resta puntuación.
-
-Si llegas a 0 puntos, quedas eliminado ❌
-
-El último jugador con puntos es el ganador 🏆
-
-👑 Modo ADMIN (Seven To Heaven)
-
-1 jugador actúa como ADMIN.
-
-El ADMIN puede ver los números de los demás jugadores.
 
 Si el ADMIN pierde, todos los USERS ganan 😇
 
