@@ -6,6 +6,7 @@ import com.juego7th.modelo.UsersGames;
 import com.juego7th.service.UsersGamesService;
 import com.juego7th.service.UsersService;
 import java.util.List;
+
 public class UsersGamesController {
 
     private final UsersGamesService usersGamesService = new UsersGamesService();
